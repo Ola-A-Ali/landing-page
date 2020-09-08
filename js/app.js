@@ -109,19 +109,19 @@ document.addEventListener('scroll', ActiveClass, false);
 
 // Scroll to anchor ID using scrollTO event
 
-// function scrollToAnchor(element){
-//     //element = document.getElementById("section4");
+function scrollToAnchor(element){
+    //element = document.getElementById("section4");
     
-//     //element.preventDefault();
-//     console.log("true");
-//     element.scrollIntoView();
-//     element.scrollIntoView(false);
-//     element.scrollIntoView({block: "end"});
-//     element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+    //element.preventDefault();
+    console.log("true");
+    element.scrollIntoView();
+    element.scrollIntoView(false);
+    element.scrollIntoView({block: "end"});
+    element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
     
-// }
+}
 
-// NavBarList.addEventListener('click', scrollToAnchor(),false);
+NavBarList.addEventListener('click', scrollToAnchor(),false);
 
 /**
  * End Main Functions
