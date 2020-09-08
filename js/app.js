@@ -36,6 +36,7 @@
 // Global Variables
     let NavBarList = document.getElementById('navbar__list');
     let Section = document.getElementsByTagName('section');
+    
 
 // build the nav
 function NavBar(){
@@ -46,12 +47,9 @@ function NavBar(){
     for(let i = 0; i < lists.length; i++){
        let sectionID = NavBarList.getAttribute('id');
       // fix section name
-        console.log(sectionID + " lllll");
+        console.log(sectionID + " lllll");  
         let navbar = document.createElement('li');
-        navbar.innerHTML = '<a href= #${sectionID}>${sectionID}</a>';
-        //navbar.innerHTML = `<a href= #${sectionID}>${sectionID}</a>`;
-
-        //navbar.innerHTML = `<a href= #sectionID>sectionID</a>`;
+       navbar.innerHTML = '<a href=#${sectionID}>${sectionID}</a>';
 
         console.log(navbar + "klklklklklk");
         createDom.appendChild(navbar);
@@ -60,41 +58,70 @@ function NavBar(){
 
 }
 
-//NavBar();
 document.addEventListener('DOMContentLoaded', NavBar);
 
 
 // Add class 'active' to section when near top of viewport
 
-function isActiveClass(){
-    const lists = document.querySelectorAll('.landing__container');
-    let topElement = [];
-    let i = 0;
-    for( i = 0; i < lists.length; i++){
-        let sec = lists[i];
-        let rect = sec.getBoundingClientRect();
-        topElement[i] = rect.top;
-        topElement.sort();
-    }
-    topElement.sort();
-    let activeSection = lists[0];
-    // activeSection.setAttribute('class','active');
+function ActiveClass(){
 
-    //activeSection.setAttribute('class','active');
-    document.getElementsByTagName("section")[0].setAttribute('class','active');
+let activeSection = document.querySelectorAll('section')
+// let lists = document.querySelectorAll('.landing__container');
+// let bounderies = element.getBoundingClientRect();
+for(let i = 0 ; i<activeSection.length; i++ ){
+   
+    let bounderies =  activeSection[i].getBoundingClientRect();
 
-    if(document.querySelector('section.active') != null && document.querySelector('a.active') != null){
-        document.querySelector('section.active').classList.remove('active');
-        document.querySelector('a.active').classList.remove('active');
-    }
+    console.log(bounderies);
+if (
+	//bounderies.top >= 0 &&
+	bounderies.left >= 0 &&
+	bounderies.right <= (window.innerWidth || document.documentElement.clientWidth) &&
+	bounderies.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+) {
+    document.addEventListener('scroll', function () {
+        let check = ActiveClass(Section) ?
+        activeSection[bounderies].setAttribute('class', 'active') :
+            console.log('The box is not visible in the viewport');
+    });
+    console.log('In the viewport!');
+
+    if(document.querySelector('section.active') != null || document.querySelector('a.active') != null){
+        console.log("remove active");
+         document.querySelector('section.active').classList.remove('active');
+         document.querySelector('a').classList.remove('active');
+     }
+    //  else if(document.querySelector('section.active') == null || document.querySelector('a.active') == null){
+    //     console.log("add active");
+    //     document.querySelector('section').classList.add('active');
+    //     document.querySelector('a').classList.add('active');
+     }
+
+
+else {
+  
+	console.log('Not in the viewport... whomp whomp');
+}
 }
 
-// Set sections as active    
-     
-    document.addEventListener('scroll', isActiveClass);
+}
+document.addEventListener('scroll', ActiveClass, false);
 
 // Scroll to anchor ID using scrollTO event
 
+// function scrollToAnchor(element){
+//     //element = document.getElementById("section4");
+    
+//     //element.preventDefault();
+//     console.log("true");
+//     element.scrollIntoView();
+//     element.scrollIntoView(false);
+//     element.scrollIntoView({block: "end"});
+//     element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+    
+// }
+
+// NavBarList.addEventListener('click', scrollToAnchor(),false);
 
 /**
  * End Main Functions
