@@ -69,10 +69,9 @@ let activeSection = document.querySelectorAll('section')
 // let lists = document.querySelectorAll('.landing__container');
 // let bounderies = element.getBoundingClientRect();
 for(let i = 0 ; i<activeSection.length; i++ ){
-   
+   //console.log(activeSection.length + " ff")
     let bounderies =  activeSection[i].getBoundingClientRect();
-
-    console.log(bounderies);
+   // console.log(bounderies);
 if (
 	//bounderies.top >= 0 &&
 	bounderies.left >= 0 &&
@@ -81,25 +80,26 @@ if (
 ) {
     document.addEventListener('scroll', function () {
         let check = ActiveClass(Section) ?
-        activeSection[bounderies].setAttribute('class', 'active') :
+        activeSection[i].setAttribute('class', 'active') :
             console.log('The box is not visible in the viewport');
     });
-    console.log('In the viewport!');
+   // activeSection[i].classList.toggle('active');
+        //console.log('In the viewport!');
 
     if(document.querySelector('section.active') != null || document.querySelector('a.active') != null){
-        console.log("remove active");
+        //console.log("remove active");
+         //activeSection[i].classList.toggle('active');
          document.querySelector('section.active').classList.remove('active');
          document.querySelector('a').classList.remove('active');
      }
-    //  else if(document.querySelector('section.active') == null || document.querySelector('a.active') == null){
-    //     console.log("add active");
-    //     document.querySelector('section').classList.add('active');
-    //     document.querySelector('a').classList.add('active');
+     else if(document.querySelector('section.active') == null || document.querySelector('a.active') == null){
+        //console.log("add active");
+        document.querySelector('section').classList.add('active');
+        document.querySelector('a').classList.add('active');
      }
-
-
+break;
+    } 
 else {
-  
 	console.log('Not in the viewport... whomp whomp');
 }
 }
@@ -109,8 +109,8 @@ document.addEventListener('scroll', ActiveClass, false);
 
 // Scroll to anchor ID using scrollTO event
 
-function scrollToAnchor(element){
-    //element = document.getElementById("section4");
+function scrollToAnchor(){
+    element = document.getElementsByTagName('h2');
     
     //element.preventDefault();
     console.log("true");
@@ -121,7 +121,7 @@ function scrollToAnchor(element){
     
 }
 
-NavBarList.addEventListener('click', scrollToAnchor(),false);
+NavBarList.addEventListener('click', scrollToAnchor,false);
 
 /**
  * End Main Functions
